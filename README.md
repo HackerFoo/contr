@@ -48,7 +48,7 @@ Building the expamples
 
 Run `make clean` first.
 
-* __test__: `make ARCH=X86 test` or `make ARCH=X86\_64 test`
+* __test__: `make ARCH=X86 test` or `make ARCH=X86_64 test`
 * __test-msp430__ (for MSP430 LaunchPad): `make ARCH=MSP430 test-msp430.elf`
 * __pump__ (for MSP430 LaunchPad): `make ARCH=MSP430 pump.elf`
 * __exp\_board__ (for FRAM Experimenter's Board): `make ARCH=MSP430 exp\_board.elf
