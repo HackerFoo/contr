@@ -18,7 +18,7 @@ In the code where you want to use these values, get the stack pointer with `GET_
      word *start;
      GET_SP(start);
 
-Call the `r_`_type_`()` function, passing `start`, `NULL`, the reactive value's index, and the initial value.
+Call the `r_{type}()` function, passing `start`, `NULL`, the reactive value's index, and the initial value.
 
     t = r_uint16_t(start, NULL, R_TIME, 0);
 
@@ -30,7 +30,7 @@ If you want to evaluate a block of code only when the reactive value changes, wr
       x = computationally_expensive_function(t);
     }
 
-In your interrupt handler, call `r_call_`_type_`()` with the reactive value's index and the new value.
+In your interrupt handler, call `r_call_{type}()` with the reactive value's index and the new value.
 
 
     __attribute__((interrupt(TIMERA0_VECTOR)))
