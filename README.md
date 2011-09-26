@@ -18,7 +18,7 @@ In the code where you want to use these values, get the stack pointer with `GET_
      word *start;
      GET_SP(start);
 
-Call the `r_{type}()` function, passing `start`, `NULL`, the reactive value's index, and the initial value.
+Call the `r_{type}()` function, passing `start`, `NULL`, the reactive value's index, and the initial value.  The control flow of your program must call the `r_{type}()` functions before calling the corresponding `r_call_{type}()` functions for them to work correctly.
 
     t = r_uint16_t(start, NULL, R_TIME, 0);
 
