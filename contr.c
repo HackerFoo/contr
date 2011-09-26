@@ -31,6 +31,7 @@ void _dump(void *x, int n) {
 #endif
 
 static cont contexts[MAX_CONTEXTS] = {0};
+static r_active = MAX_CONTEXTS;
 
 void save_stack(cont *c, word *start, word *here) {
   int n = start - here;
@@ -50,7 +51,7 @@ type r_##type(word *start, jmp_buf *skip, int id, type x) {                  \
   word *here;                                                                \
   if(!setjmp(contexts[id].registers)) { /* if we didn't longjmp here  */     \
     if(contexts[id].n) { /* the context is set */                            \
-      if(skip != NULL) longjmp(*skip, TRUE);                                 \
+      if(skip != NULL && r_active != id) longjmp(*skip, TRUE);               \
     } else { /* the context is not set */                                    \
       contexts[id].val = x;                                                  \
       contexts[id].start = start;                                            \
@@ -70,6 +71,7 @@ void r_call_##type(int id, type x) {                                         \
   restore_stack(contexts[id], here);                                         \
   register int rid = id; /* local variables not available after SET_SP() */  \
   SET_SP(here); /* no local variables from now on */                         \
+  r_active = id;                                                             \
   longjmp(contexts[rid].registers,1);                                        \
 }
 

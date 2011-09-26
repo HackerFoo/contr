@@ -25,7 +25,7 @@
 
 void main() {
   word *start;
-  uint32_t a, b;
+  uint32_t a, b, c;
   static int i = 0;
   static int j = 0;
 
@@ -37,6 +37,10 @@ void main() {
   BLOCK(b_block) {
     b = r_uint32_t(start, &b_block, R_B, 0);
     printf("b_block run\n");
+  }
+  BLOCK(c_block) {
+    c = r_uint32_t(start, &c_block, R_A, 0);
+    printf("c_block run\n");
   }
 
   printf("a = %d, b = %d\n", a, b);
