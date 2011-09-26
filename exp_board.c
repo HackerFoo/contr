@@ -150,16 +150,10 @@ void init() {
   P4IFG = 0;
 
   init_accel();
-
-  __eint();
 }
 
 int main() {
   word *start;
-  static int16_t dx = 0;
-  static uint16_t dt = 0;
-  static uint16_t xn_1 = 0;
-  static uint16_t timen_1 = 0;
   static int16_t v = 0;
   static int16_t pos = 0;
   static uint16_t cal_start = 0;
@@ -173,15 +167,16 @@ int main() {
   uint16_t button0 = r_uint16_t(start, NULL, R_BUTTON0, 0);
   uint16_t button1 = r_uint16_t(start, NULL, R_BUTTON1, 0);
   if(time - cal_start < 50) {
-    cal_x = (3*cal_x + x) >> 2;
+    cal_x = (cal_x + x + 1) >> 1;
     led(time & 2 ? 0xff : 0);
   } else if(button0) {
     cal_start = time;
+    v = pos = 0;
     cal_x = x;
   } else {
     if(button1) pos > 0 ? -0x2000 : 0x2000;
     int acc = x - cal_x;
-    if(abs(x) < 20) x = 0;
+    if(abs(x) < 50) x = 0;
     v += - (v >> 5) /* friction */
          + (acc << 4); /* force */
     pos += v;
@@ -192,5 +187,6 @@ int main() {
     led(1 << ((pos + 0x4000) >> 12));
   }
   
+  __eint();
   LPM0;
 }
