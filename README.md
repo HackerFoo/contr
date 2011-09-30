@@ -1,7 +1,7 @@
-contr - A continuation based functional reactive library in C for real-time embedded applications
+contr - A continuation based reactive programming library in C for real-time embedded applications
 ==============================================================================================
 
-__contr__ is a library designed to allow a functional reactive programming style to be used in C for embedded applications. It was originally written to make writing a simple timer running on TI's MSP430 LaunchPad (to control a pump for my aeroponic garden) more fun.
+__contr__ is a library designed to allow a reactive programming style to be used in C for embedded applications. It was originally written to make writing a simple timer running on TI's MSP430 LaunchPad (to control a pump for my aeroponic garden) more fun.
 
 USE
 ---
